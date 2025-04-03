@@ -156,8 +156,52 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Segunda Página')),
-      body: Center(child: const Text('Bem-vindo à segunda página!')),
+      appBar: AppBar(
+        title: const Text('Paulo Henrique Araújo de Almeida'),
+        backgroundColor: Color(0xFF1976D2),
+      ),
+
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset('assets/homemAranha3.jpg', fit: BoxFit.cover),
+
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Avaliação P1',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 32,
+                    color: Color(0xFFFFFFFF),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Tópicos Especiais em Informática',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26,
+                    color: Color(0xFFFFFFFF),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Itú - 07 de Abril de 2025',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFFFFFFFF),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
