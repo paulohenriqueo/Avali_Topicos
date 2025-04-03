@@ -150,15 +150,34 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
+
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  Color _color = const Color(0xFF1976D2);
+
+  void _setBlackAppBar() {
+    setState(() {
+      _color = const Color(0xff000000);
+    });
+  }
+
+  void _setBlueAppBar() {
+    setState(() {
+      _color = const Color(0xFF296277);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Paulo Henrique Araújo de Almeida'),
-        backgroundColor: Color(0xFF1976D2),
+        backgroundColor: _color,
       ),
 
       body: Stack(
@@ -208,7 +227,9 @@ class SecondPage extends StatelessWidget {
                         backgroundColor: Color(0xFFFF9800),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _setBlackAppBar();
+                      },
 
                       child: const Text(
                         'Black',
@@ -220,12 +241,16 @@ class SecondPage extends StatelessWidget {
                       ),
                     ),
 
+                    const SizedBox(width: 20),
+
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF296277),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _setBlueAppBar();
+                      },
 
                       child: const Text(
                         'Azul',
