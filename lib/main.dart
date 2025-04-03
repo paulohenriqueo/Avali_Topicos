@@ -107,14 +107,32 @@ class HomePageState extends State<HomePage> {
                 ElevatedButton(
                   onPressed: () {
                     // Navigate to another page or perform an action
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SecondPage(),
+                      ),
+                    );
                   },
-                  child: const Text('Get Started'),
+                  child: const Text('Clique aqui'),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Segunda Página')),
+      body: Center(child: const Text('Bem-vindo à segunda página!')),
     );
   }
 }
