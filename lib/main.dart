@@ -104,17 +104,42 @@ class HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 20),
 
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to another page or perform an action
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SecondPage(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 100),
+
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFD3D3D3),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        textStyle: const TextStyle(fontSize: 20),
                       ),
-                    );
-                  },
-                  child: const Text('Clique aqui'),
+
+                      onPressed: () {
+                        // Navigate to another page or perform an action
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SecondPage(),
+                          ),
+                        );
+                      },
+
+                      child: const Text(
+                        'Segunda Tela',
+
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
