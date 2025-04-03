@@ -197,6 +197,49 @@ class SecondPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
+                const SizedBox(height: 20),
+
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFFF9800),
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {},
+
+                        child: const Text(
+                          'Black',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF296277),
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {},
+
+                        child: const Text(
+                          'Azul',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
