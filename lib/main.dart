@@ -26,22 +26,94 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  late String _currentTime;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateTime();
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) => _updateTime(),
+    );
+  }
+
+  void _updateTime() {
+    setState(() {
+      _currentTime = DateFormat('hh:mm:ss a').format(DateTime.now());
+    });
+  }
+
+  String getCurrentTime() {
+    return DateFormat('dd/MM/yyyy').format(DateTime.now());
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity, // Ocupa toda a largura da tela
-        height: double.infinity, // Ocupa toda a altura da tela
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/homePage.jpg"), // Caminho da imagem
-            fit: BoxFit.cover, // Faz a imagem cobrir toda a tela
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset('assets/homePage.jpg', fit: BoxFit.cover),
+
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Avaliação Flutter',
+                  style: TextStyle(
+                    fontSize: 50,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+
+                    shadows: [Shadow(blurRadius: 10, color: Colors.black)],
+                  ),
+                ),
+
+                Text(
+                  _currentTime,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+
+                    shadows: [Shadow(blurRadius: 10, color: Colors.black)],
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                Text(
+                  getCurrentTime(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+
+                    shadows: [Shadow(blurRadius: 10, color: Colors.black)],
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigate to another page or perform an action
+                  },
+                  child: const Text('Get Started'),
+                ),
+              ],
+            ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [const SizedBox(height: 20)],
-        ),
+        ],
       ),
     );
   }
