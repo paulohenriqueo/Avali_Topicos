@@ -27,31 +27,31 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   late String _currentTime;
-  Timer? _timer;
+  Timer? _tempoAtualizacao;
 
   @override
   void initState() {
     super.initState();
-    _updateTime();
-    _timer = Timer.periodic(
+    _atualizarHora();
+    _tempoAtualizacao = Timer.periodic(
       const Duration(seconds: 1),
-      (timer) => _updateTime(),
+      (timer) => _atualizarHora(),
     );
   }
 
-  void _updateTime() {
+  void _atualizarHora() {
     setState(() {
       _currentTime = DateFormat('hh:mm:ss a').format(DateTime.now());
     });
   }
 
-  String getCurrentTime() {
+  String obterDataAtual() {
     return DateFormat('dd/MM/yyyy').format(DateTime.now());
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _tempoAtualizacao?.cancel();
     super.dispose();
   }
 
@@ -73,7 +73,6 @@ class HomePageState extends State<HomePage> {
                     fontSize: 50,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-
                     shadows: [Shadow(blurRadius: 10, color: Colors.black)],
                   ),
                 ),
@@ -81,23 +80,21 @@ class HomePageState extends State<HomePage> {
                 Text(
                   _currentTime,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-
                     shadows: [Shadow(blurRadius: 10, color: Colors.black)],
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 8),
 
                 Text(
-                  getCurrentTime(),
+                  obterDataAtual(),
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-
                     shadows: [Shadow(blurRadius: 10, color: Colors.black)],
                   ),
                 ),
@@ -108,7 +105,6 @@ class HomePageState extends State<HomePage> {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 100),
-
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFD3D3D3),
@@ -118,9 +114,7 @@ class HomePageState extends State<HomePage> {
                         ),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-
                       onPressed: () {
-                        // Navigate to another page or perform an action
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -128,10 +122,8 @@ class HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-
                       child: const Text(
                         'Segunda Tela',
-
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -154,119 +146,117 @@ class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
 
   @override
-  _SecondPageState createState() => _SecondPageState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
 class _SecondPageState extends State<SecondPage> {
-  Color _color = const Color(0xFF1976D2);
+  Color? color;
 
-  void _setBlackAppBar() {
+  void definirFundoPreta() {
     setState(() {
-      _color = const Color(0xff000000);
+      color = Color(0xFF000000);
     });
   }
 
-  void _setBlueAppBar() {
+  void definirFundoAzul() {
     setState(() {
-      _color = const Color(0xFF296277);
+      color = Color(0xff296277);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: color,
       appBar: AppBar(
         title: const Text('Paulo Henrique Araújo de Almeida'),
-        backgroundColor: _color,
+        backgroundColor: Color(0xFF1976D2),
       ),
+      body: Container(
+        decoration: BoxDecoration(
+          image:
+              color == null
+                  ? const DecorationImage(
+                    image: AssetImage('assets/homemAranha3.jpg'),
+                    fit: BoxFit.cover,
+                  )
+                  : null,
+        ),
 
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset('assets/homemAranha3.jpg', fit: BoxFit.cover),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 200),
 
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Avaliação P1',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 32,
-                    color: Color(0xFFFFFFFF),
-                    fontWeight: FontWeight.bold,
-                  ),
+              const Text(
+                'Avaliação P1',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 32,
+                  color: Color(0xFFFFFFFF),
+                  fontWeight: FontWeight.bold,
                 ),
-                const Text(
-                  'Tópicos Especiais em Informática',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Color(0xFFFFFFFF),
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              const Text(
+                'Tópicos Especiais em Informática',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 26,
+                  color: Color(0xFFFFFFFF),
+                  fontWeight: FontWeight.bold,
                 ),
-                const Text(
-                  'Itú - 07 de Abril de 2025',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xFFFFFFFF),
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              const Text(
+                'Itú - 07 de Abril de 2025',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFFFFFFFF),
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
+              const SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFF9800),
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: definirFundoPreta,
 
-                const SizedBox(height: 40),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFFF9800),
-                        textStyle: const TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        _setBlackAppBar();
-                      },
-
-                      child: const Text(
-                        'Black',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                    child: const Text(
+                      'Black',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                     ),
-
-                    const SizedBox(width: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF296277),
-                        textStyle: const TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        _setBlueAppBar();
-                      },
-
-                      child: const Text(
-                        'Azul',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                  ),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF296277),
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: definirFundoAzul,
+                    child: const Text(
+                      'Azul',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
