@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//---------Criação da primeira tela---------//
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -25,10 +26,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => HomePageState();
 }
 
+//---------Criação da classe de estado da primeira tela---------//
 class HomePageState extends State<HomePage> {
   late String _currentTime;
   Timer? _tempoAtualizacao;
 
+  //---------Criação do método initState para atualizar a hora a cada segundo---------//
   @override
   void initState() {
     super.initState();
@@ -49,12 +52,14 @@ class HomePageState extends State<HomePage> {
     return DateFormat('dd/MM/yyyy').format(DateTime.now());
   }
 
+  //---------Criação do método dispose para cancelar o timer---------//
   @override
   void dispose() {
     _tempoAtualizacao?.cancel();
     super.dispose();
   }
 
+  //---------Criação do método build para construir a interface da primeira tela---------//
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,6 +147,7 @@ class HomePageState extends State<HomePage> {
   }
 }
 
+//---------Criação da segunda tela---------//
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
 
@@ -149,6 +155,7 @@ class SecondPage extends StatefulWidget {
   State<SecondPage> createState() => _SecondPageState();
 }
 
+//---------Criação da classe de estado da segunda tela---------//
 class _SecondPageState extends State<SecondPage> {
   Color? color;
 
@@ -173,6 +180,7 @@ class _SecondPageState extends State<SecondPage> {
         backgroundColor: Color(0xFF1976D2),
       ),
       body: Container(
+        //---------Criação do Container para definir o fundo da tela---------//
         decoration: BoxDecoration(
           image:
               color == null
